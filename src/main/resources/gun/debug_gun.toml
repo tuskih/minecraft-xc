@@ -1,0 +1,163 @@
+# Debugging gun, shows all configurable properties.
+# For testing/loading gun properties.
+
+# Gun id. Used to map different custom models => gun.
+# Must be an integer from [0, 1024]. If outside this range,
+# Special -1 id is used for debug gun. This is only for
+# engine managed player custom model guns. For external plugin
+# managed guns (e.g. vehicles), this ID does nothing.
+id = -1
+
+# Item properties
+[item]
+name = "gun_debug"
+lore = [
+    "This gun is for debugging.",
+    "Trust the plan.",
+]
+
+# Visual models. Default is required (otherwise placeholder
+# will be used). Other models are optional, use -1 if they
+# do not exist.
+[model]
+default = 0     # normal model
+empty = -1      # no more ammo left
+reload = -1     # while reloading
+ads = -1        # while using aim down sights (ADS uses offhand model)
+
+# death message
+[death]
+message = "{0} was shot by {1} using {2}"
+
+# Equiped properties
+[equip]
+delay = 500     # delay before can fire gun [ms]
+slowness = 0    # slowness level while equipping this item
+no_sprint = false # if true, cannot sprint while equipping this item
+
+# Crawl required
+[crawl]
+required = false
+time = 1000 # time to finish crawl in milliseconds
+
+# Ammo id and count
+[ammo]
+id = 0
+max = 10
+per_reload = -1  # -1 to always reload to max. Otherwise, reloads fixed amount / clip.
+ignore = false   # ignore when gun out of ammo
+
+# Reload time in milliseconds
+[reload]
+time = 1500
+
+# [left-click] Single or burst mode firing config
+[shoot]
+fire_mode = "single" # "single" or "burst"
+burst_count = 3 # number of shots in a burst
+burst_delay = 2 # ticks between burst fire, either single value or array like [2, 2, 1]
+delay = 500 # Delay between [left-click] semi-auto mode shooting in milliseconds
+consume_on_use = false # consume gun when used, for single-use projectile items like panzerfaust
+
+# [right-click] Automatic fire settings
+[automatic]
+enabled = true     # if auto mode [right-click] is enabled
+delay_ticks = 2    # delay between shots in ticks, either single value or array like [2, 2, 1]
+slowness = 1       # slowness while using auto mode
+
+# sway: projectile randomness depending on player motion state
+[sway]
+base = 0.05   # base randomness
+speed_multiplier = 2.0 # 1.0 + (player_speed * speed_multiplier)
+aim_down_sights = 0.25
+ride_horse = 1.5
+ride_boat = 1.5
+ride_armor_stand = 1.0
+
+# player visual recoil from firing guns
+[recoil]
+single_horizontal = 3.0
+single_vertical = 5.0
+auto_horizontal = 3.0
+auto_vertical = 6.0
+single_fire_ramp = 0.2   # single/burst recoil multiplier ramp rate / tick
+auto_fire_ramp = 0.3     # auto fire recoil multiplier ramp rate / tick
+
+# Handler for what happens when projectile hits a block or entity.
+# If nothing specified, no effect will happen when a projectile hits.
+# Events will still be emitted, allowing custom handlers to be used.
+# So disable these if you are managing hits in external plugin.
+# Valid options for entity: ["damage", "explosion"]
+# Valid options for block: ["explosion"]
+[hit]
+entity = "damage"
+# block = "explosion"
+fire_ticks = 0
+block_fire_probability = 0.05
+
+# Projectile properties.
+# Damage types:
+# ["UNKNOWN", "MELEE", "BULLET", "FIRE", "EXPLOSIVE", "EXPLOSIVE_SHELL", "ARMOR_PIERCING", "ARMOR_PIERCING_SHELL"]
+[projectile]
+count = 1                # number of projectiles fired
+damage = 4.0
+armor_reduction = 0.5    # damage reduced / point of armor
+resist_reduction = 0.5   # damage reduced / potion resist level
+velocity = 16.0          # blocks/tick
+gravity = 0.025          # blocks/tick^2
+lifetime = 400           # ticks before despawning
+max_distance = 128.0     # distance before despawning
+damage_type = "BULLET"
+damage_min = 4.0           # min damage after distance damage drop
+damage_drop_distance = 0.0 # distance for damage drop
+proximity = 0.0            # proximity before bullet hits
+passthrough_doors = false  # make bullet pass through doors + trapdoors
+
+# projectile particle trail properties
+[projectile.particles]
+type = "REDSTONE"
+size = 0.35
+color = [0, 255, 0] # [r,g,b] in 0-255
+spacing = 1.5
+force_render = true
+block_hit_particles = true # particles on block hit
+
+[projectile.impact_particles]
+type = "EXPLOSION_NORMAL"
+count = 6
+random_x = 0.25
+random_y = 0.25
+random_z = 0.25
+force = true
+
+# Explosion damage properties. These are only used if the handler
+# for block or entity hit has an explosion effect.
+[explosion]
+damage = 8.0
+max_distance = 8.0
+radius = 1.0
+falloff = 2.0
+armor_reduction = 0.5
+blast_prot_reduction = 0.5
+damage_type = "EXPLOSIVE_SHELL"
+block_damage_power = 2.0
+
+# Explosion particle settings
+[explosion.particles]
+type = "EXPLOSION_NORMAL"
+count = 8
+random_x = 0.5
+random_y = 0.5
+random_z = 0.5
+
+# Sounds
+[sound]
+shoot = "gun_shoot"
+empty = "gun_empty"
+reload_start = "gun_reload_start"
+reload_finish = "gun_reload_finish"
+# alternative detailed mode to specify volume and pitch
+# shoot = { name = "gun_shoot", volume = 6.0, pitch = 1.0 } 
+# empty = { name = "gun_empty", volume = 1.0, pitch = 1.0 } 
+# reload_start = { name = "gun_reload_start", volume = 1.0, pitch = 1.0 } 
+# reload_finish = { name = "gun_reload_finish", volume = 1.0, pitch = 1.0 } 

@@ -1,0 +1,123 @@
+# XC Config
+# Combat plugin for miney man
+
+# folders within `plugins/xc` containing item configs
+[configs]
+ammo = "ammo"
+armor = "armor"
+gun = "gun"
+landmine = "landmine"
+melee = "melee"
+misc = "misc"
+throwable = "throwable"
+
+# material types for custom items, must match a Material exactly
+[material]
+gun = "WARPED_FUNGUS_ON_A_STICK"
+aim_down_sights = "CARROT_ON_A_STICK"
+melee = "IRON_SWORD"
+throwable = "GOLDEN_HORSE_ARMOR"
+ammo = "SNOWBALL"
+armor = "LEATHER_HORSE_ARMOR"
+
+# max item types, equivalent to max custom model id allowed
+# to create custom items (these are used to size internal
+# storage arrays, so do not make unnecessarily large)
+[max_types]
+ammo = 512
+gun = 1024
+melee = 1024
+throwable = 1024
+hat = 1024
+
+# death messages and death stats recording
+# {0} = player name
+[deaths]
+message_explosion = "{0} was guro''d in an explosion"
+message_wither = "{0} suffocated in poison gas"
+drop_head = true
+log_save_dir = "plugins/xc/logs"
+save_interval = 1200 # in ticks
+
+# gun related global configs
+[gun]
+auto_fire_max_ticks_since_last_request = 4 # max number of ticks from last auto fire request before stopping
+recoil_recovery_rate = 0.2 # recoil recovery rate per tick
+auto_reload_guns = true # automatically reload guns when ammo = 0
+auto_fire_ticks_before_reload = 2 # number of ticks with auto guns before auto-reload happens
+
+# landmine configs
+[landmine]
+min_redstone_current = 5 # min redstone current to trigger landmine activation
+disable_drop = true # disable item drop from destroying landmine block after placed
+
+# block damage
+[block_damage]
+explosion = false
+
+# global sound effects
+[sound]
+on_hit = "minecraft:entity.experience_orb.pickup"
+on_hit_enabled = true
+on_hit_volume = 1.0
+
+# armor value enforcement
+# ensure all armor pieces have these values
+[armor]
+enforce = false
+
+[armor.values]
+leather_boots = 3
+leather_chestplate = 5
+leather_helmet = 4
+leather_leggings = 4
+golden_boots = 3
+golden_chestplate = 5
+golden_helmet = 4
+golden_leggings = 4
+chainmail_boots = 3
+chainmail_chestplate = 5
+chainmail_helmet = 4
+chainmail_leggings = 4
+iron_boots = 3
+iron_chestplate = 5
+iron_helmet = 4
+iron_leggings = 4
+diamond_boots = 3
+diamond_chestplate = 5
+diamond_helmet = 4
+diamond_leggings = 4
+netherite_boots = 4
+netherite_chestplate = 6
+netherite_helmet = 5
+netherite_leggings = 5
+
+# built-in anti combat logging module
+# punishes (kills) players for logging out during combat
+# can disable if you have another plugin that does this
+[anti_combat_log]
+enabled = true
+timeout = 20.0 # in seconds
+
+# ADVANCED ENGINE CONFIG
+# generally dont touch these...
+
+# sway config
+[sway]
+movement_speed_decay = 0.5 # exponential moving avg factor for speed decay
+movement_threshold = 3.0 # speed [block/s] threshold for sway to occur
+players_before_pipelined_sway = 4 # DEPRECATED, DOES NOTHING
+
+# crawl config
+[crawl]
+only_allowed_on_crawl_weapons = true
+
+# debug stuff
+[debug]
+do_timings_default = false # default state for whether to do debug timings
+
+# experimental stuff
+[experimental]
+async_packets = true # sends most packets using an async task
+num_projectile_threads = 4 # max number of threads to use for projectile system, use -1 for max available
+entityHitboxModern = true # toggles whether to use XV style hitbox registration or Bukkit default Boundingbox(legacy)

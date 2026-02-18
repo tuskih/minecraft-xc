@@ -1,12 +1,14 @@
 # XC: minecraft gun combat system
 
+# NOTE: THIS IS NOT THE ORIGINAL PLUGIN, THIS IS A FORK, THE ORIGINAL PLUGIN CAN BE FOUND [HERE](https://github.com/phonon/minecraft-xc)
+
 # Build
 Requirements:
 - Java JDK 17 (1.18.2 plugin target java version)
 - Java JDK 16 (1.16.5 plugin target java version)
 - Java JDK 21 (1.21.4 plugin target java version)
 
-Only supports minecraft 1.16.5, 1.18.2 and 1.21.4-1.21.6. Building compiles a `.jar`
+Only supports minecraft 1.16.5, 1.18.2, 1.19.4, 1.20-1.20.1 and 1.21.4-1.21.6. Building compiles a `.jar`
 specific to that minecraft version. Server also requires paper as 
 this uses the paper api.
 
@@ -18,7 +20,10 @@ xc/
      ├─ main/           - Main plugin source
      ├─ nms/            - Minecraft version specific source
      |   ├─ v1_16_R3/   - 1.16.5
-     |   └─ v1_18_R2/   - 1.18.2
+     |   ├─ v1_18_R2/   - 1.18.2
+     |   ├─ v1_19_R3/   - 1.19.4
+     |   ├─ v1_20_R1    - 1.20 and 1.20.1
+     |   └─ v1_21_R3    - 1.21.4 to 1.21.6 
      └─ test/           - Unit tests
 ```
 
@@ -31,6 +36,21 @@ xc/
 ### Minecraft 1.18.2:
 ```
 ./gradlew build -P 1.18
+```
+
+### Minecraft 1.19.4:
+```
+./gradlew build -P 1.19
+```
+
+### Minecraft 1.20.1:
+```
+./gradlew build -P 1.20
+```
+
+### Minecraft 1.21.4:
+```
+./gradlew build -P 1.21
 ```
 
 Built `.jar` will appear in `build/libs/*.jar`.

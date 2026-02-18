@@ -4,8 +4,9 @@
 Requirements:
 - Java JDK 17 (1.18.2 plugin target java version)
 - Java JDK 16 (1.16.5 plugin target java version)
+- Java JDK 21 (1.21.4 plugin target java version)
 
-Only supports minecraft 1.16.5 and 1.18.2. Building compiles a `.jar`
+Only supports minecraft 1.16.5, 1.18.2 and 1.21.4-1.21.6. Building compiles a `.jar`
 specific to that minecraft version. Server also requires paper as 
 this uses the paper api.
 
